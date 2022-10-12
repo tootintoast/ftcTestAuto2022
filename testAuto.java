@@ -45,6 +45,10 @@ public class testAuto extends LinearOpMode {
         robot.backRight.setPower(power);
 
         while (opModeIsActive() && (robot.frontLeft.isBusy() || robot.backRight.isBusy())) {
+            telemetry.addData("EncoderFL: ", robot.frontLeft.getCurrentPosition());
+            telemetry.addData("EncoderFR: ", robot.frontRight.getCurrentPosition());
+            telemetry.addData("EncoderBL: ", robot.backLeft.getCurrentPosition());
+            telemetry.addData("EncoderBR: ", robot.backRight.getCurrentPosition());
         }
 
         // set motor power back to 0
@@ -64,7 +68,7 @@ public class testAuto extends LinearOpMode {
         int blue = color2.blue();
         int green = color2.green();
 
-
+//      Red side (Joe) , Blue side (katie, micheal and seven)
 
         waitForStart();
 
@@ -76,19 +80,43 @@ public class testAuto extends LinearOpMode {
         color2.enableLed(false);
 
         autoDrive(.7, 24.25, 24.25);
-        
+
         color2.enableLed(true);
 
         sleep(2000);
 
-        if ((red > blue) & (red > green)){
+        if ((red > blue) & (red > green)){ //local 3
+            robot.frontLeft.setPower(1);
+            robot.backLeft.setPower(1);
+            robot.frontRight.setPower(-1);
+            robot.backRight.setPower(-1);
 
+            sleep(1000);
+
+            robot.frontLeft.setPower(0);
+            robot.frontRight.setPower(0);
+            robot.backRight.setPower(0);
+            robot.backLeft.setPower(0);
+
+            autoDrive(.8, 23.5, 23.5);
         }
-        if ((blue > red) & (blue > green)){
-
+        if ((blue > red) & (blue > green)){ // local 2
+            autoDrive(.7, 20, 20);
         }
-        if ((green > red) & (green > blue)){
+        if ((green > red) & (green > blue)){ // local 1
+            robot.frontLeft.setPower(-1);
+            robot.backLeft.setPower(-1);
+            robot.frontRight.setPower(1);
+            robot.backRight.setPower(1);
 
+            sleep(1000);
+
+            robot.frontLeft.setPower(0);
+            robot.frontRight.setPower(0);
+            robot.backRight.setPower(0);
+            robot.backLeft.setPower(0);
+
+            autoDrive(.8, 23.5, 23.5);
         }
 
     }
